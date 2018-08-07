@@ -9,26 +9,33 @@ class JestAssertionError extends Error {
   }
 }
 
+const wrapMatcher = (matcher, customMessage) => {
+  const newMatcher = (...args) => {
+    try {
+      matcher(...args);
+    } catch (error) {
+      if (typeof customMessage !== 'string' || customMessage.length < 1 || !error.matcherResult) {
+        throw error;
+      }
+
+      const { matcherResult } = error;
+      const message = () => 'Custom message:\n  ' + customMessage + '\n\n' + matcherResult.message();
+
+      throw new JestAssertionError({ ...matcherResult, message }, newMatcher);
+    }
+  };
+  return newMatcher;
+};
+
 const wrapMatchers = (matchers, customMessage) => {
   return Object.keys(matchers).reduce((acc, name) => {
     const matcher = matchers[name];
 
     if (typeof matcher === 'function') {
-      const newMatcher = (...args) => {
-        try {
-          matcher(...args);
-        } catch (error) {
-          if (typeof customMessage !== 'string' || customMessage.length < 1 || !error.matcherResult) {
-            throw error;
-          }
-
-          const { matcherResult } = error;
-          const message = () => 'Custom message:\n  ' + customMessage + '\n\n' + matcherResult.message();
-
-          throw new JestAssertionError(Object.assign({}, matcherResult, { message }), newMatcher);
-        }
+      return {
+        ...acc,
+        [name]: wrapMatcher(matcher, customMessage)
       };
-      return { ...acc, [name]: newMatcher };
     }
 
     return {
