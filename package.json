@@ -1,0 +1,19 @@
+{
+  "name": "jest-expect-message",
+  "version": "0.0.1",
+  "description": "Add custom message to Jest expects",
+  "main": "dist/index.js",
+  "scripts": {
+  },
+  "keywords": [],
+  "author": "Matt Phillips <matt@mattphillips.io> mattphillips.io",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mattphillips/jest-expect-message.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mattphillips/jest-expect-message/issues"
+  },
+  "homepage": "https://github.com/mattphillips/jest-expect-message#readme"
+}
