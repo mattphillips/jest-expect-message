@@ -3,13 +3,27 @@ import withMessage from './withMessage';
 describe('withMessage()', () => {
   const ACTUAL = 'ACTUAL';
 
+  test('does not remove additional methods from expect', () => {
+    expect.assertions(3);
+    const toBeMock = jest.fn();
+    const expectMock = jest.fn(() => ({ toBe: toBeMock }));
+    expectMock.extend = 'extend';
+
+    const newExpect = withMessage(expectMock);
+    newExpect(ACTUAL, 'should fail').toBe(1);
+    expect(newExpect.extend).toBe('extend');
+    expect(expectMock).toHaveBeenCalledWith(ACTUAL);
+    expect(toBeMock).toHaveBeenCalledWith(1);
+  });
+
   test('does not throw when matcher passes', () => {
-    expect.assertions(1);
+    expect.assertions(2);
     const toBeMock = jest.fn();
     const expectMock = jest.fn(() => ({ toBe: toBeMock }));
 
     withMessage(expectMock)(ACTUAL, 'should fail').toBe(1);
-    expect(1).toBe(1);
+    expect(expectMock).toHaveBeenCalledWith(ACTUAL);
+    expect(toBeMock).toHaveBeenCalledWith(1);
   });
 
   test.each([undefined, ''])('throws original error when given message: %s', message => {

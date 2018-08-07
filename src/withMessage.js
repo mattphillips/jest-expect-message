@@ -9,9 +9,7 @@ class JestAssertionError extends Error {
   }
 }
 
-export default expect => (actual, customMessage) => {
-  const matchers = expect(actual);
-
+const wrapMatchers = (matchers, customMessage) => {
   return Object.keys(matchers).reduce((acc, key) => {
     const matcher = matchers[key];
     const newMatcher = (...args) => {
@@ -30,4 +28,9 @@ export default expect => (actual, customMessage) => {
     };
     return Object.assign({}, acc, { [key]: newMatcher });
   }, {});
+};
+
+export default expect => {
+  const expectProxy = (actual, customMessage) => wrapMatchers(expect(actual), customMessage); // partially apply expect to get all matchers and wrap them
+  return Object.assign(expectProxy, expect); // clone additional properties on expect
 };
