@@ -10,10 +10,10 @@ describe('withMessage()', () => {
     expectMock.extend = 'extend';
 
     const newExpect = withMessage(expectMock);
-    newExpect(ACTUAL, 'should fail').toBe(1);
+    newExpect(ACTUAL, 'should fail').toBe(ACTUAL);
     expect(newExpect.extend).toBe('extend');
     expect(expectMock).toHaveBeenCalledWith(ACTUAL);
-    expect(toBeMock).toHaveBeenCalledWith(1);
+    expect(toBeMock).toHaveBeenCalledWith(ACTUAL);
   });
 
   test('does not throw when matcher passes', () => {
@@ -21,7 +21,17 @@ describe('withMessage()', () => {
     const toBeMock = jest.fn();
     const expectMock = jest.fn(() => ({ toBe: toBeMock }));
 
-    withMessage(expectMock)(ACTUAL, 'should fail').toBe(1);
+    withMessage(expectMock)(ACTUAL, 'should fail').toBe(ACTUAL);
+    expect(expectMock).toHaveBeenCalledWith(ACTUAL);
+    expect(toBeMock).toHaveBeenCalledWith(ACTUAL);
+  });
+
+  test('does not throw when matcher passes when using not', () => {
+    expect.assertions(2);
+    const toBeMock = jest.fn();
+    const expectMock = jest.fn(() => ({ not: { toBe: toBeMock } }));
+
+    withMessage(expectMock)(ACTUAL, 'should fail').not.toBe(1);
     expect(expectMock).toHaveBeenCalledWith(ACTUAL);
     expect(toBeMock).toHaveBeenCalledWith(1);
   });
@@ -86,6 +96,35 @@ describe('withMessage()', () => {
       expect(e.message).toMatchSnapshot();
       expect(expectMock).toHaveBeenCalledWith(ACTUAL);
       expect(toBeMock).toHaveBeenCalledWith(1);
+    }
+  });
+
+  test('throws error with custom message when not matcher fails', () => {
+    expect.assertions(4);
+    const originalError = new Error('Boo');
+    originalError.matcherResult = {
+      actual: ACTUAL,
+      expected: 1,
+      message: () => 'expected ACTUAL to not be ACTUAL',
+      pass: false
+    };
+
+    const toBeMock = jest.fn(() => {
+      throw originalError;
+    });
+    const expectMock = jest.fn(() => ({ not: { toBe: toBeMock } }));
+
+    try {
+      withMessage(expectMock)(ACTUAL, 'should fail').not.toBe(ACTUAL);
+    } catch (e) {
+      expect(e.matcherResult).toMatchObject({
+        actual: ACTUAL,
+        expected: 1,
+        pass: false
+      });
+      expect(e.message).toMatchSnapshot();
+      expect(expectMock).toHaveBeenCalledWith(ACTUAL);
+      expect(toBeMock).toHaveBeenCalledWith(ACTUAL);
     }
   });
 });
