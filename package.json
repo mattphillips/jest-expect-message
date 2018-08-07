@@ -1,11 +1,29 @@
 {
   "name": "jest-expect-message",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Add custom message to Jest expects",
   "main": "dist/index.js",
   "scripts": {
+    "build": "babel src -d dist --ignore *.test.js",
+    "contributor": "all-contributors add",
+    "contributor:gen": "all-contributors generate",
+    "lint": "eslint src",
+    "lint:fix": "yarn lint --fix",
+    "precommit": "lint-staged",
+    "prepublishOnly": "yarn build",
+    "prettier": "prettier 'src/**/*.js' --write --single-quote=true --print-width=120",
+    "test": "jest",
+    "test:coverage": "yarn test --coverage",
+    "test:report": "codecov"
   },
-  "keywords": [],
+  "keywords": [
+    "jest",
+    "expect",
+    "message",
+    "matchers",
+    "assertions",
+    "test"
+  ],
   "author": "Matt Phillips <matt@mattphillips.io> mattphillips.io",
   "license": "MIT",
   "repository": {
@@ -15,5 +33,37 @@
   "bugs": {
     "url": "https://github.com/mattphillips/jest-expect-message/issues"
   },
-  "homepage": "https://github.com/mattphillips/jest-expect-message#readme"
+  "homepage": "https://github.com/mattphillips/jest-expect-message#readme",
+  "devDependencies": {
+    "all-contributors-cli": "^5.4.0",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-eslint": "^8.2.6",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "codecov": "^3.0.4",
+    "eslint": "^5.3.0",
+    "eslint-plugin-import": "^2.13.0",
+    "eslint-plugin-jest": "^21.18.0",
+    "husky": "^0.14.3",
+    "jest": "^23.4.2",
+    "jest-extended": "^0.8.1",
+    "lint-staged": "^7.2.0",
+    "prettier": "^1.14.0"
+  },
+  "lint-staged": {
+    "*.js": [
+      "yarn prettier",
+      "git add"
+    ]
+  },
+  "babel": {
+    "plugins": [
+      "transform-es2015-modules-commonjs",
+      "transform-object-rest-spread"
+    ]
+  },
+  "jest": {
+    "setupTestFrameworkScriptFile": "jest-extended"
+  }
 }
