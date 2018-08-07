@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`withMessage() throws error with custom message when matcher fails 1`] = `
+"Custom message:
+  should fail
+
+expected ACTUAL to be 1"
+`;

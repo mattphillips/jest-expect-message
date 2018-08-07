@@ -64,6 +64,7 @@
     ]
   },
   "jest": {
+    "testEnvironment": "node",
     "setupTestFrameworkScriptFile": "jest-extended"
   }
 }
