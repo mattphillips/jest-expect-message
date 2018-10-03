@@ -12,7 +12,7 @@ class JestAssertionError extends Error {
 const wrapMatcher = (matcher, customMessage) => {
   const newMatcher = (...args) => {
     try {
-      matcher(...args);
+      return matcher(...args);
     } catch (error) {
       if (typeof customMessage !== 'string' || customMessage.length < 1 || !error.matcherResult) {
         throw error;
