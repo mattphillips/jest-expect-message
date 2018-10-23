@@ -50,6 +50,16 @@ const wrapMatchers = (matchers, customMessage) => {
 };
 
 export default expect => {
-  const expectProxy = (actual, customMessage) => wrapMatchers(expect(actual), customMessage); // partially apply expect to get all matchers and wrap them
-  return Object.assign(expectProxy, expect); // clone additional properties on expect
+  // proxy the expect function
+  let expectProxy = Object.assign(
+    (actual, customMessage) => wrapMatchers(expect(actual), customMessage), // partially apply expect to get all matchers and chain them
+    expect // clone additional properties on expect
+  );
+
+  expectProxy.extend = o => {
+    expect.extend(o); // add new matchers to expect
+    expectProxy = Object.assign(expectProxy, expect); // clone new asymmetric matchers
+  };
+
+  return expectProxy;
 };
