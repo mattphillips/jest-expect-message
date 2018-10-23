@@ -14,3 +14,17 @@ exports[`jest-expect-message should fail without custom message 1`] = `
 
 Received: [31mfalse[39m"
 `;
+
+exports[`jest-expect-message supports custom matchers registered after jest-expect-message allows new custom matchers to use custom messages 1`] = `
+"Custom message:
+  100 % 3 === 1
+
+expected 100 to be divisible by 3"
+`;
+
+exports[`jest-expect-message supports custom matchers registered after jest-expect-message allows new custom matchers to use custom messages 2`] = `
+"Custom message:
+  101 % 1 === 0
+
+expected 101 not to be divisible by 1"
+`;

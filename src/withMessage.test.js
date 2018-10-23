@@ -7,11 +7,10 @@ describe('withMessage()', () => {
     expect.assertions(3);
     const toBeMock = jest.fn();
     const expectMock = jest.fn(() => ({ toBe: toBeMock }));
-    expectMock.extend = 'extend';
-
+    expectMock.any = 'any';
     const newExpect = withMessage(expectMock);
     newExpect(ACTUAL, 'should fail').toBe(ACTUAL);
-    expect(newExpect.extend).toBe('extend');
+    expect(newExpect.any).toBe('any');
     expect(expectMock).toHaveBeenCalledWith(ACTUAL);
     expect(toBeMock).toHaveBeenCalledWith(ACTUAL);
   });
@@ -126,5 +125,35 @@ describe('withMessage()', () => {
       expect(expectMock).toHaveBeenCalledWith(ACTUAL);
       expect(toBeMock).toHaveBeenCalledWith(ACTUAL);
     }
+  });
+
+  it('calls original expect.extend when custom matcher is registered', () => {
+    const extendMock = jest.fn();
+    const expectMock = jest.fn();
+    expectMock.extend = extendMock;
+    const newMatcher = { newMatcher: 'woo' };
+
+    withMessage(expectMock).extend(newMatcher);
+
+    expect(extendMock).toHaveBeenCalledTimes(1);
+    expect(extendMock).toHaveBeenCalledWith(newMatcher);
+  });
+
+  it('sets new asymmetric matchers when custom matcher is registered with expect.extend', () => {
+    const expectMock = () => {};
+    const extendMock = jest.fn(o => Object.assign(expectMock, o));
+    expectMock.a = 'a';
+    expectMock.extend = extendMock;
+    const newMatcher = { newMatcher: 'woo' };
+
+    const actual = withMessage(expectMock);
+
+    expect(actual).toContainAllKeys(['a', 'extend']);
+
+    actual.extend(newMatcher);
+
+    expect(extendMock).toHaveBeenCalledTimes(1);
+    expect(extendMock).toHaveBeenCalledWith(newMatcher);
+    expect(actual).toContainAllKeys(['a', 'extend', 'newMatcher']);
   });
 });
