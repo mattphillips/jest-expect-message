@@ -14,11 +14,15 @@ const wrapMatcher = (matcher, customMessage) => {
     try {
       return matcher(...args);
     } catch (error) {
-      if (typeof customMessage !== 'string' || customMessage.length < 1 || !error.matcherResult) {
+      if (!error.matcherResult) {
         throw error;
       }
-
       const { matcherResult } = error;
+
+      if (typeof customMessage !== 'string' || customMessage.length < 1) {
+        throw new JestAssertionError(matcherResult, newMatcher);
+      }
+
       const message = () => 'Custom message:\n  ' + customMessage + '\n\n' + matcherResult.message();
 
       throw new JestAssertionError({ ...matcherResult, message }, newMatcher);
