@@ -76,8 +76,18 @@ yarn add -D jest-expect-message
 
 ## Setup
 
-Add `jest-expect-message` to your Jest `setupTestFrameworkScriptFile` configuration.
-[See for help](https://facebook.github.io/jest/docs/en/configuration.html#setuptestframeworkscriptfile-string)
+Add `jest-expect-message` to your Jest `setupFilesAfterEnv` configuration.
+[See for help](https://jestjs.io/docs/en/next/configuration#setupfilesafterenv-array)
+
+### Jest v24+
+
+```json
+"jest": {
+  "setupFilesAfterEnv": ["jest-expect-message"]
+}
+```
+
+### Jest v23-
 
 ```json
 "jest": {
