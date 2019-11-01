@@ -5,6 +5,10 @@ describe('jest-expect-message', () => {
     expect(() => expect(false, 'Woah this should be false!').toBeTruthy()).toThrowErrorMatchingSnapshot();
   });
 
+  test('should fail with obj custom message', () => {
+    expect(() => expect(false, { data: { orederId: 1 } }).toBeTruthy()).toThrowErrorMatchingSnapshot();
+  });
+
   test('should fail without custom message', () => {
     expect(() => expect(false).toBeTruthy()).toThrowErrorMatchingSnapshot();
   });

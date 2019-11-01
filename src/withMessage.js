@@ -19,6 +19,9 @@ const wrapMatcher = (matcher, customMessage) => {
       }
       const { matcherResult } = error;
 
+      if (typeof customMessage === 'object') {
+        customMessage = JSON.stringify(customMessage);
+      }
       if (typeof customMessage !== 'string' || customMessage.length < 1) {
         throw new JestAssertionError(matcherResult, newMatcher);
       }
