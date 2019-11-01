@@ -9,6 +9,15 @@ exports[`jest-expect-message should fail with custom message 1`] = `
 Received: [31mfalse[39m"
 `;
 
+exports[`jest-expect-message should fail with obj custom message 1`] = `
+"Custom message:
+  {\\"data\\":{\\"orederId\\":1}}
+
+[2mexpect([22m[31mreceived[39m[2m).toBeTruthy([22m[2m)[22m
+
+Received: [31mfalse[39m"
+`;
+
 exports[`jest-expect-message should fail without custom message 1`] = `
 "[2mexpect([22m[31mreceived[39m[2m).toBeTruthy([22m[2m)[22m
 
