@@ -66,7 +66,7 @@ With `jest-expect-message` this will fail with your custom error message:
 
 With npm:
 ```sh
-npm install --save-dev jest-expect-message
+npm i -D jest-expect-message
 ```
 
 With yarn:
