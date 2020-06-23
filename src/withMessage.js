@@ -36,16 +36,12 @@ const wrapMatchers = (matchers, customMessage) => {
     const matcher = matchers[name];
 
     if (typeof matcher === 'function') {
-      return {
-        ...acc,
-        [name]: wrapMatcher(matcher, customMessage)
-      };
+      acc[name] = wrapMatcher(matcher, customMessage);
+    } else {
+      acc[name] = wrapMatchers(matcher, customMessage); // recurse on .not/.resolves/.rejects
     }
 
-    return {
-      ...acc,
-      [name]: wrapMatchers(matcher, customMessage) // recurse on .not/.resolves/.rejects
-    };
+    return acc;
   }, {});
 };
 
