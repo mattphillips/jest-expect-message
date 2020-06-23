@@ -48,7 +48,15 @@ const wrapMatchers = (matchers, customMessage) => {
 export default expect => {
   // proxy the expect function
   let expectProxy = Object.assign(
-    (actual, customMessage) => wrapMatchers(expect(actual), customMessage), // partially apply expect to get all matchers and chain them
+    (actual, customMessage) => {
+      let matchers = expect(actual); // partially apply expect to get all matchers and chain them
+      if (customMessage) {
+        // only pay the cost of proxying matchers if we received a customMessage
+        matchers = wrapMatchers(matchers, customMessage);
+      }
+
+      return matchers;
+    },
     expect // clone additional properties on expect
   );
 
