@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "types": [
+      "node",
+      "jest",
+      "jest-expect-message"
+    ],
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "outDir": "build",
+    "target": "es5"
+  }
+}
