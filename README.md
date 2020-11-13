@@ -95,6 +95,19 @@ Add `jest-expect-message` to your Jest `setupFilesAfterEnv` configuration.
 }
 ```
 
+### Configure ESlint
+
+```json
+"rules": {
+  "jest/valid-expect": [
+    "error",
+    {
+      "maxArgs": 2
+    }
+  ]
+}
+```
+
 ## Usage
 
  - `expect(actual, message)`
