@@ -7,6 +7,7 @@ describe('withMessage()', () => {
     expect.assertions(3);
     const toBeMock = jest.fn();
     const expectMock = jest.fn(() => ({ toBe: toBeMock }));
+    // @ts-ignore
     expectMock.any = 'any';
     const newExpect = withMessage(expectMock);
     newExpect(ACTUAL, 'should fail').toBe(ACTUAL);
@@ -72,6 +73,7 @@ describe('withMessage()', () => {
   test('throws error with custom message when matcher fails', () => {
     expect.assertions(4);
     const originalError = new Error('Boo');
+    // @ts-ignore
     originalError.matcherResult = {
       actual: ACTUAL,
       expected: 1,
@@ -101,6 +103,7 @@ describe('withMessage()', () => {
   test('throws error with custom message when not matcher fails', () => {
     expect.assertions(4);
     const originalError = new Error('Boo');
+    // @ts-ignore
     originalError.matcherResult = {
       actual: ACTUAL,
       expected: 1,
@@ -130,6 +133,7 @@ describe('withMessage()', () => {
   it('calls original expect.extend when custom matcher is registered', () => {
     const extendMock = jest.fn();
     const expectMock = jest.fn();
+    // @ts-ignore
     expectMock.extend = extendMock;
     const newMatcher = { newMatcher: 'woo' };
 

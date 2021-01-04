@@ -21,6 +21,16 @@
         "test",
         "tool"
       ]
+    },
+    {
+      "login": "DonIsaac",
+      "name": "Don Isaac",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/22823424?v=4",
+      "profile": "https://www.opensourceryumd.com",
+      "contributions": [
+        "question",
+        "code"
+      ]
     }
   ],
   "repoType": "github"

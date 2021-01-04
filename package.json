@@ -3,8 +3,9 @@
   "version": "1.0.2",
   "description": "Add custom message to Jest expects",
   "main": "dist/index.js",
+  "types": "types/index.d.ts",
   "scripts": {
-    "build": "babel src -d dist --ignore *.test.js",
+    "build": "babel src -d dist --ignore *.test.js,*.test.ts",
     "contributor": "all-contributors add",
     "contributor:gen": "all-contributors generate",
     "lint": "eslint src",
@@ -49,7 +50,8 @@
     "jest": "^23.4.2",
     "jest-extended": "^0.8.1",
     "lint-staged": "^7.2.0",
-    "prettier": "^1.14.0"
+    "prettier": "^1.14.0",
+    "ts-jest": "^26.4.4"
   },
   "lint-staged": {
     "*.js": [
@@ -62,9 +64,5 @@
       "transform-es2015-modules-commonjs",
       "transform-object-rest-spread"
     ]
-  },
-  "jest": {
-    "testEnvironment": "node",
-    "setupTestFrameworkScriptFile": "jest-extended"
   }
 }
