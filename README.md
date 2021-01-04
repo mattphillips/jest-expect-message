@@ -111,8 +111,8 @@ test('returns 2 when adding 1 and 1', () => {
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore -->
-| [<img src="https://avatars0.githubusercontent.com/u/5610087?v=4" width="100px;"/><br /><sub><b>Matt Phillips</b></sub>](http://mattphillips.io)<br />[💻](https://github.com/mattphillips/jest-expect-message/commits?author=mattphillips "Code") [📖](https://github.com/mattphillips/jest-expect-message/commits?author=mattphillips "Documentation") [💡](#example-mattphillips "Examples") [🤔](#ideas-mattphillips "Ideas, Planning, & Feedback") [🚇](#infra-mattphillips "Infrastructure (Hosting, Build-Tools, etc)") [⚠️](https://github.com/mattphillips/jest-expect-message/commits?author=mattphillips "Tests") [🔧](#tool-mattphillips "Tools") |
-| :---: |
+| [<img src="https://avatars0.githubusercontent.com/u/5610087?v=4" width="100px;"/><br /><sub><b>Matt Phillips</b></sub>](http://mattphillips.io)<br />[💻](https://github.com/mattphillips/jest-expect-message/commits?author=mattphillips "Code") [📖](https://github.com/mattphillips/jest-expect-message/commits?author=mattphillips "Documentation") [💡](#example-mattphillips "Examples") [🤔](#ideas-mattphillips "Ideas, Planning, & Feedback") [🚇](#infra-mattphillips "Infrastructure (Hosting, Build-Tools, etc)") [⚠️](https://github.com/mattphillips/jest-expect-message/commits?author=mattphillips "Tests") [🔧](#tool-mattphillips "Tools") | [<img src="https://avatars3.githubusercontent.com/u/22823424?v=4" width="100px;"/><br /><sub><b>Don Isaac</b></sub>](https://www.opensourceryumd.com)<br />[💬](#question-DonIsaac "Answering Questions") [💻](https://github.com/mattphillips/jest-expect-message/commits?author=DonIsaac "Code") |
+| :---: | :---: |
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 ## LICENSE
