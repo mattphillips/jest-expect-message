@@ -81,10 +81,17 @@ Add `jest-expect-message` to your Jest `setupFilesAfterEnv` configuration.
 
 ### Jest v24+
 
+Add this to `package.json`
 ```json
 "jest": {
   "setupFilesAfterEnv": ["jest-expect-message"]
 }
+```
+
+Or if you encountered with this error `"We detected setupFilesAfterEnv in your package.json ..."`, undo `setupFilesAfterEnv` and create a file `src/setupTests.js` containing a requirement statement:
+```js
+// src/setupTests.js
+require("jest-expect-message")
 ```
 
 ### Jest v23-
@@ -97,13 +104,20 @@ Add `jest-expect-message` to your Jest `setupFilesAfterEnv` configuration.
 
 ## Usage
 
- - `expect(actual, message)`
+ - `expect(actual, message, wrapper)`
    - `actual`: The value you would normally pass into an `expect` to assert against with a given matcher.
    - `message`: String, the custom message you want to be printed should the `expect` fail.
+   - `wrapper (optional)`: Function, if you want to wrap the message with a custom text instead of default `"Custom message:..."`.
 
 ```js
 test('returns 2 when adding 1 and 1', () => {
   expect(1 + 1, 'Woah this should be 2!').toBe(3);
+});
+
+// with a custom wrapper
+test('returns 2 when adding 1 and 1', () => {
+  const wrapper = msg => `| Custom Message << ${msg} >> |`
+  expect(1 + 1, 'Woah this should be 2!', wrapper).toBe(3);
 });
 ```
 
@@ -111,8 +125,8 @@ test('returns 2 when adding 1 and 1', () => {
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore -->
-| [<img src="https://avatars0.githubusercontent.com/u/5610087?v=4" width="100px;"/><br /><sub><b>Matt Phillips</b></sub>](http://mattphillips.io)<br />[💻](https://github.com/mattphillips/jest-expect-message/commits?author=mattphillips "Code") [📖](https://github.com/mattphillips/jest-expect-message/commits?author=mattphillips "Documentation") [💡](#example-mattphillips "Examples") [🤔](#ideas-mattphillips "Ideas, Planning, & Feedback") [🚇](#infra-mattphillips "Infrastructure (Hosting, Build-Tools, etc)") [⚠️](https://github.com/mattphillips/jest-expect-message/commits?author=mattphillips "Tests") [🔧](#tool-mattphillips "Tools") |
-| :---: |
+| [<img src="https://avatars0.githubusercontent.com/u/5610087?v=4" width="100px;"/><br /><sub><b>Matt Phillips</b></sub>](http://mattphillips.io)<br />[💻](https://github.com/mattphillips/jest-expect-message/commits?author=mattphillips "Code") [📖](https://github.com/mattphillips/jest-expect-message/commits?author=mattphillips "Documentation") [💡](#example-mattphillips "Examples") [🤔](#ideas-mattphillips "Ideas, Planning, & Feedback") [🚇](#infra-mattphillips "Infrastructure (Hosting, Build-Tools, etc)") [⚠️](https://github.com/mattphillips/jest-expect-message/commits?author=mattphillips "Tests") [🔧](#tool-mattphillips "Tools") | [<img src="https://avatars.githubusercontent.com/u/32903969?v=4" width="100px;"/><br /><sub><b>Mohammad</b></sub>](https://github.com/mjafari98)<br />[💻](https://github.com/mattphillips/jest-expect-message/commits?author=mjafari98 "Code") [📖](https://github.com/mattphillips/jest-expect-message/commits?author=mjafari98 "Documentation") [💡](#example-mjafari98 "Examples") [🤔](#ideas-mjafari98 "Ideas, Planning, & Feedback") [⚠️](https://github.com/mattphillips/jest-expect-message/commits?author=mjafari98 "Tests") |
+| :---: | :---: |
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 ## LICENSE

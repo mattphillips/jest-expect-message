@@ -21,6 +21,19 @@
         "test",
         "tool"
       ]
+    },
+    {
+      "login": "mjafari98",
+      "name": "Mohammad",
+      "avatar_url": "https://avatars.githubusercontent.com/u/32903969?v=4",
+      "profile": "https://github.com/mjafari98",
+      "contributions": [
+        "code",
+        "doc",
+        "example",
+        "ideas",
+        "test"
+      ]
     }
   ],
   "repoType": "github"

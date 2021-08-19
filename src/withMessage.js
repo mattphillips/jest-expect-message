@@ -9,7 +9,7 @@ class JestAssertionError extends Error {
   }
 }
 
-const wrapMatcher = (matcher, customMessage) => {
+const wrapMatcher = (matcher, customMessage, messageWrapper) => {
   const newMatcher = (...args) => {
     try {
       return matcher(...args);
@@ -23,7 +23,9 @@ const wrapMatcher = (matcher, customMessage) => {
         throw new JestAssertionError(matcherResult, newMatcher);
       }
 
-      const message = () => 'Custom message:\n  ' + customMessage + '\n\n' + matcherResult.message();
+      const customMessageResult = messageWrapper(customMessage);
+
+      const message = () => `${customMessageResult}\n\n${matcherResult.message()}`;
 
       throw new JestAssertionError({ ...matcherResult, message }, newMatcher);
     }
@@ -31,20 +33,22 @@ const wrapMatcher = (matcher, customMessage) => {
   return newMatcher;
 };
 
-const wrapMatchers = (matchers, customMessage) => {
+const defaultMessageWrapper = message => `Custom message:\n  ${message}`;
+
+const wrapMatchers = (matchers, customMessage, messageWrapper = defaultMessageWrapper) => {
   return Object.keys(matchers).reduce((acc, name) => {
     const matcher = matchers[name];
 
     if (typeof matcher === 'function') {
       return {
         ...acc,
-        [name]: wrapMatcher(matcher, customMessage)
+        [name]: wrapMatcher(matcher, customMessage, messageWrapper)
       };
     }
 
     return {
       ...acc,
-      [name]: wrapMatchers(matcher, customMessage) // recurse on .not/.resolves/.rejects
+      [name]: wrapMatchers(matcher, customMessage, messageWrapper) // recurse on .not/.resolves/.rejects
     };
   }, {});
 };
@@ -52,7 +56,7 @@ const wrapMatchers = (matchers, customMessage) => {
 export default expect => {
   // proxy the expect function
   let expectProxy = Object.assign(
-    (actual, customMessage) => wrapMatchers(expect(actual), customMessage), // partially apply expect to get all matchers and chain them
+    (actual, customMessage, messageWrapper) => wrapMatchers(expect(actual), customMessage, messageWrapper), // partially apply expect to get all matchers and chain them
     expect // clone additional properties on expect
   );
 

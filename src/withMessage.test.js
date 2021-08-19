@@ -156,4 +156,26 @@ describe('withMessage()', () => {
     expect(extendMock).toHaveBeenCalledWith(newMatcher);
     expect(actual).toContainAllKeys(['a', 'extend', 'newMatcher']);
   });
+
+  test('shows message wrapped with custom wrapper if it is passed', () => {
+    const message = 'this should be wrapped';
+    const wrapper = jest.fn(msg => `test custom wrapper here << ${msg} >>`);
+
+    try {
+      withMessage(expect)(ACTUAL, message, wrapper).toBe(1);
+    } catch (e) {
+      expect(wrapper).toHaveBeenCalledWith(message);
+      expect(e.message).toContain(wrapper(message));
+    }
+  });
+
+  test('shows message wrapped with default wrapper if it is not passed', () => {
+    const message = 'this should work';
+
+    try {
+      withMessage(expect)(ACTUAL, message).toBe(1);
+    } catch (e) {
+      expect(e.message).toContain(message);
+    }
+  });
 });
