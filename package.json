@@ -1,6 +1,6 @@
 {
   "name": "jest-expect-message",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Add custom message to Jest expects",
   "main": "dist/index.js",
   "types": "types/index.d.ts",
