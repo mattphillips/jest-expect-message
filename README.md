@@ -9,7 +9,7 @@ Add custom message to Jest expects
 
 <hr />
 
-[![Build Status](https://img.shields.io/travis/mattphillips/jest-expect-message.svg?style=flat-square)](https://travis-ci.org/mattphillips/jest-expect-message)
+[![Build Status](https://img.shields.io/github/workflow/status/mattphillips/jest-expect-message/GitHub%20CI/main?style=flat-square)](https://github.com/mattphillips/jest-expect-message/actions/workflows/ci.yaml)
 [![Code Coverage](https://img.shields.io/codecov/c/github/mattphillips/jest-expect-message.svg?style=flat-square)](https://codecov.io/github/mattphillips/jest-expect-message)
 [![version](https://img.shields.io/npm/v/jest-expect-message.svg?style=flat-square)](https://www.npmjs.com/package/jest-expect-message)
 [![downloads](https://img.shields.io/npm/dm/jest-expect-message.svg?style=flat-square)](http://npm-stat.com/charts.html?package=jest-expect-message&from=2017-09-14)
