@@ -28,9 +28,10 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: yarn
       - name: install with jest@${{ matrix.jest-version }}
-        run:
-          yarn add --dev jest@${{ matrix.jest-version }} babel-jest@${{ matrix.jest-version }} @types/jest@${{ matrix.jest-version }}
+        run: yarn add --dev jest@${{ matrix.jest-version }} babel-jest@${{ matrix.jest-version }} @types/jest@${{ matrix.jest-version }}
       - run: yarn test:coverage
+        env:
+          FORCE_COLOR: true
       - uses: codecov/codecov-action@v3
 
   test-os:
@@ -49,6 +50,8 @@ jobs:
           cache: yarn
       - run: yarn install
       - run: yarn test:coverage
+        env:
+          FORCE_COLOR: true
       - uses: codecov/codecov-action@v3
 
   lint:
