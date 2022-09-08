@@ -9,6 +9,16 @@ exports[`jest-expect-message should fail with custom message 1`] = `
 Received: <red>false</color>"
 `;
 
+exports[`jest-expect-message should fail with custom message for async test 1`] = `
+"Custom message:
+  hello
+
+<dim>expect(</intensity><red>received</color><dim>).</intensity>rejects<dim>.</intensity>toBe<dim>(</intensity><green>expected</color><dim>) // Object.is equality</intensity>
+
+Expected: <green>false</color>
+Received: <red>true</color>"
+`;
+
 exports[`jest-expect-message should fail without custom message 1`] = `
 "<dim>expect(</intensity><red>received</color><dim>).</intensity>toBeTruthy<dim>()</intensity>
 

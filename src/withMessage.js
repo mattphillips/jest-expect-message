@@ -12,8 +12,20 @@ class JestAssertionError extends Error {
 const wrapMatcher = (matcher, customMessage, config) => {
   const newMatcher = (...args) => {
     try {
-      return matcher(...args);
-    } catch (error) {
+      const result = matcher(...args);
+
+      if (result && typeof result.then === 'function') {
+        return result.catch(rethrowWithMessage).catch(function handleError(error) {
+          throw new JestAssertionError(error.matcherResult, handleError);
+        });
+      } else {
+        return result;
+      }
+    } catch (e) {
+      rethrowWithMessage(e);
+    }
+
+    function rethrowWithMessage(error) {
       if (!error.matcherResult) {
         throw error;
       }
