@@ -98,6 +98,12 @@ Add `jest-expect-message` to your Jest `setupFilesAfterEnv` configuration.
 }
 ```
 
+If you have a custom setup file and want to use this library then add the following to your setup file.
+
+```js
+import "jest-expect-message";
+```
+
 ### Configure Typescript
 
 Add the following entry to your tsconfig to enable Typescript support.
