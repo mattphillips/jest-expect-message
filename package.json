@@ -4,6 +4,9 @@
   "description": "Add custom message to Jest expects",
   "main": "dist/index.js",
   "types": "types/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "babel src --out-dir dist --ignore 'src/**/*.test.js'",
     "prepublishOnly": "yarn build",
