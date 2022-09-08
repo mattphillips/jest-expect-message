@@ -15,7 +15,8 @@
     "prettier": "prettier 'src/**/*.js' --write --single-quote=true --print-width=120",
     "test": "jest",
     "test:coverage": "yarn test --coverage",
-    "test:report": "codecov"
+    "test:report": "codecov",
+    "typecheck": "tsc --noEmit types/index.d.ts"
   },
   "keywords": [
     "jest",
@@ -36,6 +37,7 @@
   },
   "homepage": "https://github.com/mattphillips/jest-expect-message#readme",
   "devDependencies": {
+    "@types/jest": "^29.0.0",
     "all-contributors-cli": "^5.4.0",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
@@ -50,7 +52,8 @@
     "jest": "^23.4.2",
     "jest-extended": "^0.8.1",
     "lint-staged": "^7.2.0",
-    "prettier": "^1.14.0"
+    "prettier": "^1.14.0",
+    "typescript": "^4.8.2"
   },
   "lint-staged": {
     "*.js": [
