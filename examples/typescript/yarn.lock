@@ -1384,10 +1384,10 @@ jest-environment-node@^29.0.2:
     jest-mock "^29.0.2"
     jest-util "^29.0.2"
 
-jest-expect-message@^1.0.4:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/jest-expect-message/-/jest-expect-message-1.0.4.tgz#0ac99e1d325885c249e225bb2f2f0aec218c10c1"
-  integrity sha512-bcUBwHbUPMvCeEpBmP6sFmfw8JaqjmoBt7qr7ZDNRU2jhR1GrpWVMChDz29o3jva0nrRUQYOkvDSO+7dhONRpg==
+jest-expect-message@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/jest-expect-message/-/jest-expect-message-1.1.1.tgz#db3fe0f8cadf60f65c9d26dd37f6b3eeac07ff0b"
+  integrity sha512-UtnD9jLCQBoBnVU/ViamG1yyQmsVBYEji53hcn1eKMArmHpqgiOiczUSkiiZPEN8HCWyp4IGSX6b2gUJ8d/IEg==
 
 jest-get-type@^29.0.0:
   version "29.0.0"
