@@ -643,14 +643,7 @@
   dependencies:
     "@types/istanbul-lib-report" "*"
 
-"@types/jest-expect-message@^1.0.4":
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/@types/jest-expect-message/-/jest-expect-message-1.0.4.tgz#fe7b83ee6a0509729d53a1f4f301f4781ca00105"
-  integrity sha512-2jOgQ38y+YZ8envIA+P2XGyiuXA0fM3QQ8OI15hkzsVX+4oxSIeBhWhUKPEwWzzmc4AdFta9pDvrvJVZzC/9Sg==
-  dependencies:
-    "@types/jest" "*"
-
-"@types/jest@*", "@types/jest@^29.0.0":
+"@types/jest@^29.0.0":
   version "29.0.0"
   resolved "https://registry.yarnpkg.com/@types/jest/-/jest-29.0.0.tgz#bc66835bf6b09d6a47e22c21d7f5b82692e60e72"
   integrity sha512-X6Zjz3WO4cT39Gkl0lZ2baFRaEMqJl5NC1OjElkwtNzAlbkr2K/WJXkBkH5VP0zx4Hgsd2TZYdOEfvp2Dxia+Q==
@@ -1391,10 +1384,10 @@ jest-environment-node@^29.0.2:
     jest-mock "^29.0.2"
     jest-util "^29.0.2"
 
-jest-expect-message@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/jest-expect-message/-/jest-expect-message-1.0.2.tgz#6d67cdf093457a607d231038a3b84aa3a076bcba"
-  integrity sha512-WFiXMgwS2lOqQZt1iJMI/hOXpUm32X+ApsuzYcQpW5m16Pv6/Gd9kgC+Q+Q1YVNU04kYcAOv9NXMnjg6kKUy6Q==
+jest-expect-message@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/jest-expect-message/-/jest-expect-message-1.0.4.tgz#0ac99e1d325885c249e225bb2f2f0aec218c10c1"
+  integrity sha512-bcUBwHbUPMvCeEpBmP6sFmfw8JaqjmoBt7qr7ZDNRU2jhR1GrpWVMChDz29o3jva0nrRUQYOkvDSO+7dhONRpg==
 
 jest-get-type@^29.0.0:
   version "29.0.0"
