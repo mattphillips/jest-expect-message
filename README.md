@@ -95,6 +95,18 @@ Add `jest-expect-message` to your Jest `setupFilesAfterEnv` configuration.
 }
 ```
 
+### Configure Typescript
+
+Add the following entry to your tsconfig to enable Typescript support.
+
+```json
+  "files": ["node_modules/jest-expect-message/types/index.d.ts"],
+```
+
+#### Example
+
+Custom message [example](/example) with typescript
+
 ### Configure ESlint
 
 ```json
@@ -120,9 +132,7 @@ test('returns 2 when adding 1 and 1', () => {
 });
 
 ```
-## Example
 
-Custom message [example](/example) with typescript
 
 ## Contributors
 

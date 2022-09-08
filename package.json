@@ -3,6 +3,7 @@
   "version": "1.0.2",
   "description": "Add custom message to Jest expects",
   "main": "dist/index.js",
+  "types": "types/index.d.ts",
   "scripts": {
     "build": "babel src -d dist --ignore *.test.js",
     "contributor": "all-contributors add",
