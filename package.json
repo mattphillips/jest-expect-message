@@ -58,7 +58,7 @@
     "testEnvironment": "node",
     "testPathIgnorePatterns": [
       ".idea",
-      "example",
+      "examples",
       "/node_modules/",
       "/fixtures/",
       "/dist/"

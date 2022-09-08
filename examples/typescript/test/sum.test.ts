@@ -1,4 +1,4 @@
-import sum from "./sum";
+import sum from "../src/sum";
 
 describe("Test math", () => {
   it("should be equal 3", () => {
