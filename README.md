@@ -4,6 +4,7 @@
 🃏🗯
 
 Add custom message to Jest expects
+
 </div>
 
 <hr />
@@ -25,8 +26,8 @@ possible in Jest.
 For example:
 
 ```js
-test('returns 2 when adding 1 and 1', () => {
-  expect(1 + 1, 'Woah this should be 2!').toBe(3);
+test("returns 2 when adding 1 and 1", () => {
+  expect(1 + 1, "Woah this should be 2!").toBe(3);
 });
 ```
 
@@ -43,8 +44,8 @@ Expect takes at most one argument.
 For example the same test as above:
 
 ```js
-test('returns 2 when adding 1 and 1', () => {
-  expect(1 + 1, 'Woah this should be 2!').toBe(3);
+test("returns 2 when adding 1 and 1", () => {
+  expect(1 + 1, "Woah this should be 2!").toBe(3);
 });
 ```
 
@@ -65,11 +66,13 @@ With `jest-expect-message` this will fail with your custom error message:
 ## Installation
 
 With npm:
+
 ```sh
 npm install --save-dev jest-expect-message
 ```
 
 With yarn:
+
 ```sh
 yarn add -D jest-expect-message
 ```
@@ -122,27 +125,16 @@ Custom message [example](/example) with typescript
 
 ## Usage
 
- - `expect(actual, message)`
-   - `actual`: The value you would normally pass into an `expect` to assert against with a given matcher.
-   - `message`: String, the custom message you want to be printed should the `expect` fail.
+- `expect(actual, message)`
+  - `actual`: The value you would normally pass into an `expect` to assert against with a given matcher.
+  - `message`: String, the custom message you want to be printed should the `expect` fail.
 
 ```js
-test('returns 2 when adding 1 and 1', () => {
-  expect(1 + 1, 'Woah this should be 2!').toBe(3);
+test("returns 2 when adding 1 and 1", () => {
+  expect(1 + 1, "Woah this should be 2!").toBe(3);
 });
-
 ```
-
-
-## Contributors
-
-<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-<!-- prettier-ignore -->
-| [<img src="https://avatars0.githubusercontent.com/u/5610087?v=4" width="100px;"/><br /><sub><b>Matt Phillips</b></sub>](http://mattphillips.io)<br />[💻](https://github.com/mattphillips/jest-expect-message/commits?author=mattphillips "Code") [📖](https://github.com/mattphillips/jest-expect-message/commits?author=mattphillips "Documentation") [💡](#example-mattphillips "Examples") [🤔](#ideas-mattphillips "Ideas, Planning, & Feedback") [🚇](#infra-mattphillips "Infrastructure (Hosting, Build-Tools, etc)") [⚠️](https://github.com/mattphillips/jest-expect-message/commits?author=mattphillips "Tests") [🔧](#tool-mattphillips "Tools") |
-| :---: |
-<!-- ALL-CONTRIBUTORS-LIST:END -->
 
 ## LICENSE
 
 [MIT](/LICENSE)
-

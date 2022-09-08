@@ -6,8 +6,6 @@
   "types": "types/index.d.ts",
   "scripts": {
     "build": "babel src -d dist --ignore *.test.js",
-    "contributor": "all-contributors add",
-    "contributor:gen": "all-contributors generate",
     "lint": "eslint src",
     "lint:fix": "yarn lint --fix",
     "precommit": "lint-staged",
@@ -38,7 +36,6 @@
   "homepage": "https://github.com/mattphillips/jest-expect-message#readme",
   "devDependencies": {
     "@types/jest": "^29.0.0",
-    "all-contributors-cli": "^5.4.0",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-eslint": "^8.2.6",
