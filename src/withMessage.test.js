@@ -35,7 +35,7 @@ describe('withMessage()', () => {
     expect(toBeMock).toHaveBeenCalledWith(1);
   });
 
-  test.each([undefined, ''])('throws original error when given message: %s', message => {
+  test.each([undefined, ''])('throws original error when given message: %s', (message) => {
     expect.assertions(3);
     const originalError = new Error('Boo');
     const toBeMock = jest.fn(() => {
@@ -141,7 +141,7 @@ describe('withMessage()', () => {
 
   it('sets new asymmetric matchers when custom matcher is registered with expect.extend', () => {
     const expectMock = () => {};
-    const extendMock = jest.fn(o => Object.assign(expectMock, o));
+    const extendMock = jest.fn((o) => Object.assign(expectMock, o));
     expectMock.a = 'a';
     expectMock.extend = extendMock;
     const newMatcher = { newMatcher: 'woo' };
@@ -155,5 +155,79 @@ describe('withMessage()', () => {
     expect(extendMock).toHaveBeenCalledTimes(1);
     expect(extendMock).toHaveBeenCalledWith(newMatcher);
     expect(actual).toContainAllKeys(['a', 'extend', 'newMatcher']);
+  });
+
+  test('does not throw error with matcher message when `config.showMatcherMessage` is false', () => {
+    expect.assertions(2);
+    const originalError = new Error('Boo');
+    const matcherMessage = 'expected ACTUAL to not be ACTUAL';
+    originalError.matcherResult = {
+      actual: ACTUAL,
+      expected: 1,
+      message: matcherMessage,
+      pass: false
+    };
+    const toBeMock = jest.fn(() => {
+      throw originalError;
+    });
+    const expectMock = jest.fn(() => ({ toBe: toBeMock }));
+
+    const customMessage = 'should fail';
+    try {
+      withMessage(expectMock)(ACTUAL, customMessage, { showMatcherMessage: false }).toBe(1);
+    } catch (e) {
+      expect(e.message).toInclude(customMessage);
+      expect(e.message).not.toInclude(matcherMessage);
+    }
+  });
+
+  test('does not throw error with custom message prefix when `config.showPrefix` is false', () => {
+    expect.assertions(3);
+    const originalError = new Error('Boo');
+    const matcherMessage = 'expected ACTUAL to not be ACTUAL';
+    originalError.matcherResult = {
+      actual: ACTUAL,
+      expected: 1,
+      message: matcherMessage,
+      pass: false
+    };
+    const toBeMock = jest.fn(() => {
+      throw originalError;
+    });
+    const expectMock = jest.fn(() => ({ toBe: toBeMock }));
+
+    const customMessage = 'should fail';
+    try {
+      withMessage(expectMock)(ACTUAL, customMessage, { showPrefix: false }).toBe(1);
+    } catch (e) {
+      expect(e.message).not.toInclude('Custom message:\n');
+      expect(e.message).toInclude(customMessage);
+      expect(e.message).toInclude(matcherMessage);
+    }
+  });
+
+  test('throws error containing only custom message prefix when `config.showPrefix` and `config.showMatcherMessage` are false', () => {
+    expect.assertions(3);
+    const originalError = new Error('Boo');
+    const matcherMessage = 'expected ACTUAL to not be ACTUAL';
+    originalError.matcherResult = {
+      actual: ACTUAL,
+      expected: 1,
+      message: matcherMessage,
+      pass: false
+    };
+    const toBeMock = jest.fn(() => {
+      throw originalError;
+    });
+    const expectMock = jest.fn(() => ({ toBe: toBeMock }));
+
+    const customMessage = 'should fail';
+    try {
+      withMessage(expectMock)(ACTUAL, customMessage, { showPrefix: false, showMatcherMessage: false }).toBe(1);
+    } catch (e) {
+      expect(e.message).not.toInclude('Custom message:\n');
+      expect(e.message).not.toInclude(matcherMessage);
+      expect(e.message).toInclude(customMessage);
+    }
   });
 });

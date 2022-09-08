@@ -9,7 +9,7 @@ class JestAssertionError extends Error {
   }
 }
 
-const wrapMatcher = (matcher, customMessage) => {
+const wrapMatcher = (matcher, customMessage, config) => {
   const newMatcher = (...args) => {
     try {
       return matcher(...args);
@@ -26,7 +26,9 @@ const wrapMatcher = (matcher, customMessage) => {
       const matcherMessage =
         typeof error.matcherResult.message === 'function' ? error.matcherResult.message() : error.matcherResult.message;
 
-      const message = () => 'Custom message:\n  ' + customMessage + '\n\n' + matcherMessage;
+      const messagePrefix = config.showPrefix ? 'Custom message:\n  ' : '';
+
+      const message = () => messagePrefix + customMessage + (config.showMatcherMessage ? '\n\n' + matcherMessage : '');
 
       throw new JestAssertionError({ ...matcherResult, message }, newMatcher);
     }
@@ -34,28 +36,32 @@ const wrapMatcher = (matcher, customMessage) => {
   return newMatcher;
 };
 
-const wrapMatchers = (matchers, customMessage) => {
+const wrapMatchers = (matchers, customMessage, config) => {
   return Object.keys(matchers).reduce((acc, name) => {
     const matcher = matchers[name];
 
     if (typeof matcher === 'function') {
-      acc[name] = wrapMatcher(matcher, customMessage);
+      acc[name] = wrapMatcher(matcher, customMessage, config);
     } else {
-      acc[name] = wrapMatchers(matcher, customMessage); // recurse on .not/.resolves/.rejects
+      acc[name] = wrapMatchers(matcher, customMessage, config); // recurse on .not/.resolves/.rejects
     }
 
     return acc;
   }, {});
 };
 
-export default expect => {
+export default (expect) => {
   // proxy the expect function
   let expectProxy = Object.assign(
-    (actual, customMessage) => {
+    (actual, customMessage, options = {}) => {
+      const config = {
+        showMatcherMessage: typeof options.showMatcherMessage === 'boolean' ? options.showMatcherMessage : true,
+        showPrefix: typeof options.showPrefix === 'boolean' ? options.showPrefix : true
+      };
       let matchers = expect(actual); // partially apply expect to get all matchers and chain them
       if (customMessage) {
         // only pay the cost of proxying matchers if we received a customMessage
-        matchers = wrapMatchers(matchers, customMessage);
+        matchers = wrapMatchers(matchers, customMessage, config);
       }
 
       return matchers;
@@ -63,7 +69,7 @@ export default expect => {
     expect // clone additional properties on expect
   );
 
-  expectProxy.extend = o => {
+  expectProxy.extend = (o) => {
     expect.extend(o); // add new matchers to expect
     expectProxy = Object.assign(expectProxy, expect); // clone new asymmetric matchers
   };

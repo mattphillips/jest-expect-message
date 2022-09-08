@@ -26,8 +26,8 @@ possible in Jest.
 For example:
 
 ```js
-test("returns 2 when adding 1 and 1", () => {
-  expect(1 + 1, "Woah this should be 2!").toBe(3);
+test('returns 2 when adding 1 and 1', () => {
+  expect(1 + 1, 'Woah this should be 2!').toBe(3);
 });
 ```
 
@@ -44,8 +44,8 @@ Expect takes at most one argument.
 For example the same test as above:
 
 ```js
-test("returns 2 when adding 1 and 1", () => {
-  expect(1 + 1, "Woah this should be 2!").toBe(3);
+test('returns 2 when adding 1 and 1', () => {
+  expect(1 + 1, 'Woah this should be 2!').toBe(3);
 });
 ```
 
@@ -101,7 +101,7 @@ Add `jest-expect-message` to your Jest `setupFilesAfterEnv` configuration.
 If you have a custom setup file and want to use this library then add the following to your setup file.
 
 ```js
-import "jest-expect-message";
+import 'jest-expect-message';
 ```
 
 ### Configure Typescript
@@ -131,14 +131,63 @@ Custom message [example](/example) with typescript
 
 ## Usage
 
-- `expect(actual, message)`
+- `expect(actual, message, options?)`
   - `actual`: The value you would normally pass into an `expect` to assert against with a given matcher.
   - `message`: String, the custom message you want to be printed should the `expect` fail.
+  - `options`: An optional object that controls if the custom message prefix and/or if the original matcher message are shown.
+    - type: `{ showPrefix: boolean, showMatcherMessage: boolean }`
+    - Note: `options` is optional and so are both `showPrefix` and `showMatcherMessage` which will be defaulted to `true`.
 
 ```js
-test("returns 2 when adding 1 and 1", () => {
-  expect(1 + 1, "Woah this should be 2!").toBe(3);
+test('returns 2 when adding 1 and 1', () => {
+  expect(1 + 1, 'Woah this should be 2!').toBe(3);
 });
+// ↓ ↓ ↓ ↓ ↓ ↓
+/*
+  ● returns 2 when adding 1 and 1
+
+    Custom message:
+      Woah this should be 2!
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: 3
+    Received: 2
+*/
+```
+
+### ShowPrefix false
+
+```js
+test('returns 2 when adding 1 and 1', () => {
+  expect(1 + 1, 'Woah this should be 2!', { showPrefix: false }).toBe(3);
+});
+// ↓ ↓ ↓ ↓ ↓ ↓
+/*
+  ● returns 2 when adding 1 and 1
+
+    Woah this should be 2!
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: 3
+    Received: 2
+*/
+```
+
+### ShowMatcherMessage false
+
+```js
+test('returns 2 when adding 1 and 1', () => {
+  expect(1 + 1, 'Woah this should be 2!', { showMatcherMessage: false }).toBe(3);
+});
+// ↓ ↓ ↓ ↓ ↓ ↓
+/*
+  ● returns 2 when adding 1 and 1
+
+    Custom message:
+      Woah this should be 2!
+*/
 ```
 
 ## LICENSE
