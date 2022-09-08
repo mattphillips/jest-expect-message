@@ -29,8 +29,13 @@ const wrapMatcher = (matcher, customMessage, config) => {
       const messagePrefix = config.showPrefix ? 'Custom message:\n  ' : '';
 
       const message = () => messagePrefix + customMessage + (config.showMatcherMessage ? '\n\n' + matcherMessage : '');
+      const e = new JestAssertionError({ ...matcherResult, message }, newMatcher);
 
-      throw new JestAssertionError({ ...matcherResult, message }, newMatcher);
+      if (!config.showStack) {
+        e.stack = null;
+      }
+
+      throw e;
     }
   };
   return newMatcher;
@@ -56,7 +61,8 @@ export default (expect) => {
     (actual, customMessage, options = {}) => {
       const config = {
         showMatcherMessage: typeof options.showMatcherMessage === 'boolean' ? options.showMatcherMessage : true,
-        showPrefix: typeof options.showPrefix === 'boolean' ? options.showPrefix : true
+        showPrefix: typeof options.showPrefix === 'boolean' ? options.showPrefix : true,
+        showStack: typeof options.showStack === 'boolean' ? options.showStack : true
       };
       let matchers = expect(actual); // partially apply expect to get all matchers and chain them
       if (customMessage) {

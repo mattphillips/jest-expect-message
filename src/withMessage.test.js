@@ -158,7 +158,7 @@ describe('withMessage()', () => {
   });
 
   test('does not throw error with matcher message when `config.showMatcherMessage` is false', () => {
-    expect.assertions(2);
+    expect.assertions(3);
     const originalError = new Error('Boo');
     const matcherMessage = 'expected ACTUAL to not be ACTUAL';
     originalError.matcherResult = {
@@ -176,13 +176,14 @@ describe('withMessage()', () => {
     try {
       withMessage(expectMock)(ACTUAL, customMessage, { showMatcherMessage: false }).toBe(1);
     } catch (e) {
+      expect(e.stack).not.toBe(null);
       expect(e.message).toInclude(customMessage);
       expect(e.message).not.toInclude(matcherMessage);
     }
   });
 
   test('does not throw error with custom message prefix when `config.showPrefix` is false', () => {
-    expect.assertions(3);
+    expect.assertions(4);
     const originalError = new Error('Boo');
     const matcherMessage = 'expected ACTUAL to not be ACTUAL';
     originalError.matcherResult = {
@@ -200,6 +201,7 @@ describe('withMessage()', () => {
     try {
       withMessage(expectMock)(ACTUAL, customMessage, { showPrefix: false }).toBe(1);
     } catch (e) {
+      expect(e.stack).not.toBe(null);
       expect(e.message).not.toInclude('Custom message:\n');
       expect(e.message).toInclude(customMessage);
       expect(e.message).toInclude(matcherMessage);
@@ -207,7 +209,7 @@ describe('withMessage()', () => {
   });
 
   test('throws error containing only custom message prefix when `config.showPrefix` and `config.showMatcherMessage` are false', () => {
-    expect.assertions(3);
+    expect.assertions(4);
     const originalError = new Error('Boo');
     const matcherMessage = 'expected ACTUAL to not be ACTUAL';
     originalError.matcherResult = {
@@ -225,8 +227,35 @@ describe('withMessage()', () => {
     try {
       withMessage(expectMock)(ACTUAL, customMessage, { showPrefix: false, showMatcherMessage: false }).toBe(1);
     } catch (e) {
+      expect(e.stack).not.toBe(null);
       expect(e.message).not.toInclude('Custom message:\n');
       expect(e.message).not.toInclude(matcherMessage);
+      expect(e.message).toInclude(customMessage);
+    }
+  });
+
+  test('throws error with empty stack when `config.showStack` is false', () => {
+    expect.assertions(4);
+    const originalError = new Error('Boo');
+    const matcherMessage = 'expected ACTUAL to not be ACTUAL';
+    originalError.matcherResult = {
+      actual: ACTUAL,
+      expected: 1,
+      message: matcherMessage,
+      pass: false
+    };
+    const toBeMock = jest.fn(() => {
+      throw originalError;
+    });
+    const expectMock = jest.fn(() => ({ toBe: toBeMock }));
+
+    const customMessage = 'should fail';
+    try {
+      withMessage(expectMock)(ACTUAL, customMessage, { showStack: false }).toBe(1);
+    } catch (e) {
+      expect(e.stack).toBe(null);
+      expect(e.message).toInclude('Custom message:\n');
+      expect(e.message).toInclude(matcherMessage);
       expect(e.message).toInclude(customMessage);
     }
   });

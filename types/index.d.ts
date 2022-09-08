@@ -3,7 +3,7 @@ declare namespace jest {
     <T = any>(
       actual: T,
       message?: string,
-      options?: { showMatcherMessage?: boolean; showPrefix?: boolean }
+      options?: { showMatcherMessage?: boolean; showPrefix?: boolean; showStack?: boolean }
     ): Matchers<T>;
   }
 }
