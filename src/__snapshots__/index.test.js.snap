@@ -4,15 +4,15 @@ exports[`jest-expect-message should fail with custom message 1`] = `
 "Custom message:
   Woah this should be false!
 
-[2mexpect([22m[31mreceived[39m[2m).toBeTruthy([22m[2m)[22m
+<dim>expect(</intensity><red>received</color><dim>).</intensity>toBeTruthy<dim>()</intensity>
 
-Received: [31mfalse[39m"
+Received: <red>false</color>"
 `;
 
 exports[`jest-expect-message should fail without custom message 1`] = `
-"[2mexpect([22m[31mreceived[39m[2m).toBeTruthy([22m[2m)[22m
+"<dim>expect(</intensity><red>received</color><dim>).</intensity>toBeTruthy<dim>()</intensity>
 
-Received: [31mfalse[39m"
+Received: <red>false</color>"
 `;
 
 exports[`jest-expect-message supports custom matchers registered after jest-expect-message allows new custom matchers to use custom messages 1`] = `
