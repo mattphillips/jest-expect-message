@@ -4,6 +4,6 @@ declare namespace jest {
       actual: T,
       message?: string,
       options?: { showMatcherMessage?: boolean; showPrefix?: boolean; showStack?: boolean }
-    ): Matchers<T>;
+    ): JestMatchers<T>;
   }
 }
