@@ -98,6 +98,37 @@ describe('withMessage()', () => {
     }
   });
 
+  test('calls custom message function when matcher fails', () => {
+    expect.assertions(5);
+    const originalError = new Error('Boo');
+    originalError.matcherResult = {
+      actual: ACTUAL,
+      expected: 1,
+      message: () => 'expected ACTUAL to be 1',
+      pass: false
+    };
+
+    const toBeMock = jest.fn(() => {
+      throw originalError;
+    });
+    const expectMock = jest.fn(() => ({ toBe: toBeMock }));
+
+    const customMessageFn = jest.fn(() => 'custom message from function');
+    try {
+      withMessage(expectMock)(ACTUAL, customMessageFn).toBe(1);
+    } catch (e) {
+      expect(e.matcherResult).toMatchObject({
+        actual: ACTUAL,
+        expected: 1,
+        pass: false
+      });
+      expect(e.message).toMatchSnapshot();
+      expect(customMessageFn).toHaveBeenCalled();
+      expect(expectMock).toHaveBeenCalledWith(ACTUAL);
+      expect(toBeMock).toHaveBeenCalledWith(1);
+    }
+  });
+
   test('throws error with custom message when not matcher fails', () => {
     expect.assertions(4);
     const originalError = new Error('Boo');

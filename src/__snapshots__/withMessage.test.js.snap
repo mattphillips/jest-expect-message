@@ -1,5 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`withMessage() calls custom message function when matcher fails 1`] = `
+"Custom message:
+  custom message from function
+
+expected ACTUAL to be 1"
+`;
+
 exports[`withMessage() throws error with custom message when matcher fails 1`] = `
 "Custom message:
   should fail

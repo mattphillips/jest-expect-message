@@ -39,13 +39,22 @@ Expect takes at most one argument.
 
 ## Solution
 
-`jest-expect-message` allows you to call `expect` with a second argument of a `String` message.
+`jest-expect-message` allows you to call `expect` with a second argument of a `String` message or `function`.
 
 For example the same test as above:
 
 ```js
 test('returns 2 when adding 1 and 1', () => {
   expect(1 + 1, 'Woah this should be 2!').toBe(3);
+});
+```
+
+Or you can pass a function that generates and returns the extra message:
+
+```js
+test('returns 2 when adding 1 and 1', () => {
+  const context = 2;
+  expect(1 + 1, () => (`Woah this should be ${context}!`)).toBe(3);
 });
 ```
 

@@ -9,7 +9,7 @@ class JestAssertionError extends Error {
   }
 }
 
-const wrapMatcher = (matcher, customMessage, config) => {
+const wrapMatcher = (matcher, customMessageOrFn, config) => {
   const newMatcher = (...args) => {
     try {
       const result = matcher(...args);
@@ -30,7 +30,8 @@ const wrapMatcher = (matcher, customMessage, config) => {
         throw error;
       }
       const { matcherResult } = error;
-
+      
+      const customMessage = typeof customMessageOrFn === 'function' ? customMessageOrFn() : customMessageOrFn;
       if (typeof customMessage !== 'string' || customMessage.length < 1) {
         throw new JestAssertionError(matcherResult, newMatcher);
       }
