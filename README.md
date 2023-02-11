@@ -114,7 +114,7 @@ Add the following entry to your tsconfig to enable Typescript support.
 
 #### Example
 
-Custom message [example](/example) with typescript
+Custom message [example](/examples/typescript) with typescript
 
 ### Configure ESlint
 
