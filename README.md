@@ -104,19 +104,33 @@ If you have a custom setup file and want to use this library then add the follow
 import 'jest-expect-message';
 ```
 
-### Configure Typescript
+### Configure TypeScript
 
-Add the following entry to your tsconfig to enable Typescript support.
+If you keep the `types` list of the `compilerOptions` explicit, add `jest-expect-message` to it:
 
 ```json
-  "files": ["node_modules/jest-expect-message/types/index.d.ts"],
+{
+  "compilerOptions": {
+    "types": ["jest", "jest-expect-message"]
+  }
+}
 ```
 
-#### Example
+Alternatively if you prefer letting TypeScript to discover the `@types/*` packages automatically, declare `jest-expect-message` as an `@types/*` package in `package.json`:
 
-Custom message [example](/example) with typescript
+```json
+{
+  "devDependencies": {
+    "@types/jest-expect-message": "npm:jest-expect-message@*",
+  }
+}
+```
 
-### Configure ESlint
+After adding the line, remember to run `npm install`, `yarn install` or `pnpm install`, depending on your package manager.
+
+For reference, see the [example](/examples/typescript/) with TypeScript.
+
+### Configure ESLint
 
 ```json
 "rules": {
