@@ -123,7 +123,7 @@ Custom message [example](/example) with typescript
   "jest/valid-expect": [
     "error",
     {
-      "maxArgs": 2
+      "maxArgs": 3
     }
   ]
 }
