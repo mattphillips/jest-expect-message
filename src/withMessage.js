@@ -89,7 +89,11 @@ export default (expect) => {
 
   expectProxy.extend = (o) => {
     expect.extend(o); // add new matchers to expect
-    expectProxy = Object.assign(expectProxy, expect); // clone new asymmetric matchers
+    Object.keys(expect).forEach((key) => {
+      if (key !== 'extend') {
+        expectProxy[key] = expect[key];
+      }
+    })
   };
 
   return expectProxy;
